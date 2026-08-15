@@ -1,0 +1,248 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int             @id @default(autoincrement())
+  name          String
+  email         String          @unique
+  password_hash String
+  role          String          @default("staff")
+  is_active     Boolean         @default(true)
+  created_at    DateTime        @default(now())
+  staff_profile Staff?
+  payments      Payment[]
+  checkin_logs  CheckinLog[]
+  food_logs     FoodLog[]
+  incidents     Incident[]
+  safety_checks SafetyCheck[]
+
+  @@map("users")
+}
+
+model Camper {
+  id                  Int               @id @default(autoincrement())
+  first_name          String
+  last_name           String
+  dob                 DateTime
+  gender              String?
+  address             String?
+  father_name         String?
+  father_profession   String?
+  mother_name         String?
+  mother_profession   String?
+  contact_phone       String?
+  contact_email       String?
+  is_large_family     Boolean           @default(false)
+  created_at          DateTime          @default(now())
+  updated_at          DateTime          @default(now()) @updatedAt
+  
+  registrations       Registration[]
+  group_memberships   GroupMember[]
+  medical_records     MedicalRecord[]
+  notifications       Notification[]
+  incidents           Incident[]
+
+  @@index([last_name, first_name])
+  @@index([contact_phone])
+  @@map("campers")
+}
+
+model Period {
+  id               Int            @id @default(autoincrement())
+  year             Int
+  name             String
+  gender           String?
+  age_group        String?
+  class_range      String?
+  start_date       DateTime
+  end_date         DateTime
+  price            Float
+  early_bird_price Float?
+  capacity         Int
+  status           String         @default("active")
+
+  registrations    Registration[]
+  groups           Group[]
+
+  @@map("periods")
+}
+
+model Registration {
+  id                 Int           @id @default(autoincrement())
+  camper_id          Int
+  period_id          Int
+  overnight_type     String?
+  submitted_at       DateTime      @default(now())
+  status             String        @default("enrolled")
+  has_duplicate_flag Boolean       @default(false)
+  has_mismatch_flag  Boolean       @default(false)
+  registration_code  String?       @unique
+
+  camper             Camper        @relation(fields: [camper_id], references: [id], onDelete: Cascade)
+  period             Period        @relation(fields: [period_id], references: [id], onDelete: Cascade)
+  payments           Payment[]
+  invoices           Invoice[]
+  checkin_logs       CheckinLog[]
+
+  @@unique([camper_id, period_id])
+  @@map("registrations")
+}
+
+model Payment {
+  id              Int          @id @default(autoincrement())
+  registration_id Int
+  amount          Float
+  payment_date    DateTime
+  method          String
+  note            String?
+  recorded_by     Int?
+  created_at      DateTime     @default(now())
+
+  registration    Registration @relation(fields: [registration_id], references: [id], onDelete: Cascade)
+  recorder        User?        @relation(fields: [recorded_by], references: [id])
+
+  @@map("payments")
+}
+
+model Group {
+  id            Int           @id @default(autoincrement())
+  period_id     Int
+  group_number  Int
+  leader_name   String?
+  assistants    String?       // Stored as JSON string for SQLite
+
+  period        Period        @relation(fields: [period_id], references: [id], onDelete: Cascade)
+  members       GroupMember[]
+
+  @@map("groups")
+}
+
+model GroupMember {
+  id        Int    @id @default(autoincrement())
+  group_id  Int
+  camper_id Int
+
+  group     Group  @relation(fields: [group_id], references: [id], onDelete: Cascade)
+  camper    Camper @relation(fields: [camper_id], references: [id], onDelete: Cascade)
+
+  @@unique([group_id, camper_id])
+  @@map("group_members")
+}
+
+model Staff {
+  id                 Int     @id @default(autoincrement())
+  user_id            Int?    @unique
+  name               String
+  role_title         String?
+  phone              String?
+  background_check   Boolean @default(false)
+  ministry_statement Boolean @default(false)
+  health_check       Boolean @default(false)
+  active             Boolean @default(true)
+
+  user               User?   @relation(fields: [user_id], references: [id])
+
+  @@map("staff")
+}
+
+model MedicalRecord {
+  id                Int       @id @default(autoincrement())
+  camper_id         Int
+  status            String    @default("pending")
+  allergies         String?
+  conditions        String?   // Stored as JSON string for SQLite
+  medications       String?
+  emergency_contact String?
+  emergency_phone   String?
+  submitted_at      DateTime?
+
+  camper            Camper    @relation(fields: [camper_id], references: [id], onDelete: Cascade)
+
+  @@map("medical_records")
+}
+
+model CheckinLog {
+  id              Int          @id @default(autoincrement())
+  registration_id Int
+  event_type      String
+  scanned_at      DateTime     @default(now())
+  scanned_by      Int?
+
+  registration    Registration @relation(fields: [registration_id], references: [id], onDelete: Cascade)
+  scanner         User?        @relation(fields: [scanned_by], references: [id])
+
+  @@map("checkin_logs")
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  camper_id Int?
+  type      String?
+  sent_at   DateTime @default(now())
+  channel   String?  @default("email")
+
+  camper    Camper?  @relation(fields: [camper_id], references: [id])
+
+  @@map("notifications")
+}
+
+model FoodLog {
+  id              Int      @id @default(autoincrement())
+  date            DateTime @default(now())
+  type            String   // e.g., 'temperature', 'cleanliness', 'critical_point', 'supplier_receipt'
+  description     String
+  status          String   @default("ok") // ok, warning, critical
+  recorded_by     Int?
+
+  recorder        User?    @relation(fields: [recorded_by], references: [id])
+
+  @@map("food_logs")
+}
+
+model Invoice {
+  id              Int          @id @default(autoincrement())
+  registration_id Int
+  amount          Float
+  status          String       @default("not_issued") // not_issued, issued, paid, cancelled
+  issued_at       DateTime?
+  due_date        DateTime?
+  apy_number      String?      @unique
+  
+  registration    Registration @relation(fields: [registration_id], references: [id], onDelete: Cascade)
+
+  @@map("invoices")
+}
+
+model Incident {
+  id              Int       @id @default(autoincrement())
+  camper_id       Int?
+  date            DateTime  @default(now())
+  type            String    // medical, behavioral, general
+  description     String
+  action_taken    String?
+  reported_by     Int?
+
+  camper          Camper?   @relation(fields: [camper_id], references: [id], onDelete: Cascade)
+  reporter        User?     @relation(fields: [reported_by], references: [id])
+
+  @@map("incidents")
+}
+
+model SafetyCheck {
+  id              Int      @id @default(autoincrement())
+  date            DateTime @default(now())
+  area            String   // e.g., 'kitchen', 'dorm_a', 'fire_extinguishers'
+  status          String   @default("pass") // pass, fail, needs_maintenance
+  notes           String?
+  inspector_id    Int?
+
+  inspector       User?    @relation(fields: [inspector_id], references: [id])
+
+  @@map("safety_checks")
+}
