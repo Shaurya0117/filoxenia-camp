@@ -10,9 +10,10 @@ export default function ParentPortal() {
   const { user, logout } = useAuth();
   const [children, setChildren] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [periods, setPeriods] = useState([]);
+  const [selectedMedicalCamper, setSelectedMedicalCamper] = useState(null);
+  const [medicalSubmitting, setMedicalSubmitting] = useState(false);
 
   const fetchChildren = async () => {
     try {
@@ -67,6 +68,29 @@ export default function ParentPortal() {
       toast.error(err.response?.data?.error || 'Failed to enroll camper');
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const handleMedicalSubmit = async (e) => {
+    e.preventDefault();
+    setMedicalSubmitting(true);
+    const formData = new FormData(e.target);
+    const payload = {
+      camper_id: selectedMedicalCamper.id,
+      allergies: formData.get('allergies'),
+      medications: formData.get('medications'),
+      emergency_contact: formData.get('emergency_contact'),
+      emergency_phone: formData.get('emergency_phone')
+    };
+
+    try {
+      await api.post('/medical', payload);
+      toast.success('Medical record submitted securely!');
+      setSelectedMedicalCamper(null);
+    } catch (err) {
+      toast.error('Failed to submit medical record');
+    } finally {
+      setMedicalSubmitting(false);
     }
   };
 
@@ -161,8 +185,11 @@ export default function ParentPortal() {
                         <button className="flex-1 bg-white/10 hover:bg-white/20 border border-white/10 py-2 rounded-xl text-sm font-semibold transition flex items-center justify-center gap-2">
                           <ClipboardList className="w-4 h-4" /> Details
                         </button>
-                        <button className="flex-1 bg-white/10 hover:bg-white/20 border border-white/10 py-2 rounded-xl text-sm font-semibold transition flex items-center justify-center gap-2">
-                          <Stethoscope className="w-4 h-4" /> Medical
+                        <button 
+                          onClick={() => setSelectedMedicalCamper(child)}
+                          className="flex-1 bg-red-500/20 hover:bg-red-500/40 border border-red-500/30 text-red-100 py-2 rounded-xl text-sm font-semibold transition flex items-center justify-center gap-2"
+                        >
+                          <Stethoscope className="w-4 h-4" /> Medical Form
                         </button>
                       </div>
                     </div>
@@ -228,6 +255,54 @@ export default function ParentPortal() {
                 <button type="submit" disabled={submitting} className="px-8 py-3 bg-[#1a2b4c] hover:bg-[#0f1930] text-white font-bold rounded-xl shadow-sm transition disabled:opacity-50 flex items-center gap-2">
                   {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
                   {submitting ? 'Submitting...' : 'Submit Registration'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Medical Form Modal */}
+      {selectedMedicalCamper && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto text-gray-900">
+            <div className="p-6 border-b sticky top-0 bg-white/95 backdrop-blur z-10 flex justify-between items-center bg-red-50">
+              <div>
+                <h2 className="text-2xl font-bold text-red-900 flex items-center gap-2">
+                  <Stethoscope className="w-6 h-6" /> Medical Record
+                </h2>
+                <p className="text-red-700 text-sm font-medium mt-1">For {selectedMedicalCamper.first_name} {selectedMedicalCamper.last_name}</p>
+              </div>
+              <button onClick={() => setSelectedMedicalCamper(null)} className="p-2 hover:bg-red-100 rounded-full transition text-red-700">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <form onSubmit={handleMedicalSubmit} className="p-8 space-y-6">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700">Allergies (if any)</label>
+                <input name="allergies" type="text" placeholder="e.g. Peanuts, Penicillin, None" className="w-full p-3 border rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-red-400 outline-none transition" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700">Current Medications</label>
+                <input name="medications" type="text" placeholder="e.g. Inhaler, None" className="w-full p-3 border rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-red-400 outline-none transition" />
+              </div>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-gray-700">Emergency Contact Name</label>
+                  <input required name="emergency_contact" type="text" className="w-full p-3 border rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-red-400 outline-none transition" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-gray-700">Emergency Phone</label>
+                  <input required name="emergency_phone" type="text" className="w-full p-3 border rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-red-400 outline-none transition" />
+                </div>
+              </div>
+              <div className="pt-6 border-t flex justify-end gap-3">
+                <button type="button" onClick={() => setSelectedMedicalCamper(null)} className="px-6 py-3 font-medium text-gray-600 hover:bg-gray-100 rounded-xl transition" disabled={medicalSubmitting}>
+                  Cancel
+                </button>
+                <button type="submit" disabled={medicalSubmitting} className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-sm transition disabled:opacity-50 flex items-center gap-2">
+                  {medicalSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
+                  {medicalSubmitting ? 'Saving...' : 'Save Securely'}
                 </button>
               </div>
             </form>
