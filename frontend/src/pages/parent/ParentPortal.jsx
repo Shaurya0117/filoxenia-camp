@@ -10,6 +10,7 @@ export default function ParentPortal() {
   const [loading, setLoading] = useState(true);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [periods, setPeriods] = useState([]);
 
   const fetchChildren = async () => {
     try {
@@ -25,12 +26,22 @@ export default function ParentPortal() {
     }
   };
 
+  const fetchPeriods = async () => {
+    try {
+      const res = await api.get('/periods');
+      setPeriods(res.data.periods || []);
+    } catch (err) {
+      console.error('Failed to fetch periods');
+    }
+  };
+
   useEffect(() => {
     // Forcefully remove stuck Vite error overlay if the user's browser cached it
     const viteOverlay = document.querySelector('vite-error-overlay');
     if (viteOverlay) viteOverlay.remove();
 
     fetchChildren();
+    fetchPeriods();
   }, []);
 
   const handleRegisterSubmit = async (e) => {
@@ -98,7 +109,7 @@ export default function ParentPortal() {
       <main className="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-12 flex flex-col lg:flex-row gap-16">
         
         {/* Left Side: Hero Text */}
-        <div className="lg:w-1/2 mt-10">
+        <div className="lg:w-1/2 mt-10 opacity-0-start animate-fade-in-up delay-100">
           <h1 className="text-5xl md:text-7xl font-black uppercase tracking-widest text-white mb-6" style={{ textShadow: '2px 4px 10px rgba(0,0,0,0.5)' }}>
             TIME TO <br/> CAMP
           </h1>
@@ -114,7 +125,7 @@ export default function ParentPortal() {
         </div>
 
         {/* Right Side: Glassmorphism Dashboard Cards */}
-        <div className="lg:w-1/2 space-y-6">
+        <div className="lg:w-1/2 space-y-6 opacity-0-start animate-fade-in-up delay-300">
           <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-3xl shadow-2xl">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
               <User className="w-6 h-6 text-amber-400" /> Your Campers
@@ -201,10 +212,9 @@ export default function ParentPortal() {
                 <label className="text-sm font-semibold text-gray-700">Select Camp Period</label>
                 <select required name="period_id" className="w-full p-3 border rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-[#1a2b4c] outline-none transition">
                   <option value="">Choose a period...</option>
-                  <option value="1">Boys 15+ years old (Aug 7 - Aug 21)</option>
-                  <option value="2">Boys 12-14 years old (Jul 10 - Jul 20)</option>
-                  <option value="3">Girls 15+ years old (Jul 20 - Aug 2)</option>
-                  <option value="4">Girls 12-14 years old (Jun 30 - Jul 10)</option>
+                  {periods.map(p => (
+                    <option key={p.id} value={p.id}>{p.name} ({new Date(p.start_date).toLocaleDateString()} - {new Date(p.end_date).toLocaleDateString()})</option>
+                  ))}
                 </select>
               </div>
               <div className="pt-6 border-t flex justify-end gap-3">

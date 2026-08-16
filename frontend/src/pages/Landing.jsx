@@ -42,17 +42,17 @@ export default function Landing() {
       {/* Main Content */}
       <main className="relative z-10 max-w-4xl mx-auto px-6 pt-20 pb-32 text-center">
         
-        <h1 className="font-serif text-5xl md:text-6xl font-bold leading-tight text-[#1a2e26] mb-6 drop-shadow-md">
+        <h1 className="font-serif text-5xl md:text-6xl font-bold leading-tight text-[#1a2e26] mb-6 drop-shadow-md opacity-0-start animate-fade-in-up delay-100">
           Where Adventure Meets<br/>Safety & Creativity.
         </h1>
         
-        <p className="text-lg md:text-xl text-[#2c3e38] max-w-2xl mx-auto mb-16 leading-relaxed font-serif italic font-medium drop-shadow-sm">
+        <p className="text-lg md:text-xl text-[#2c3e38] max-w-2xl mx-auto mb-16 leading-relaxed font-serif italic font-medium drop-shadow-sm opacity-0-start animate-fade-in-up delay-200">
           In the rush of modern life, imagine a camp that feels like a deep breath — gentle, grounding, and secure. A place where children reconnect with nature and themselves.
         </p>
 
         {/* 3 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16 px-4">
-          <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl">
+          <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl opacity-0-start animate-fade-in-up delay-300">
             <div className="w-12 h-12 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-sm">
               <Compass className="w-6 h-6 text-[#d85c5c]" />
             </div>
@@ -62,7 +62,7 @@ export default function Landing() {
             </p>
           </div>
           
-          <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl">
+          <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl opacity-0-start animate-fade-in-up delay-400">
             <div className="w-12 h-12 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-sm">
               <Book className="w-6 h-6 text-[#d85c5c]" />
             </div>
@@ -72,7 +72,7 @@ export default function Landing() {
             </p>
           </div>
 
-          <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl">
+          <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl opacity-0-start animate-fade-in-up delay-500">
             <div className="w-12 h-12 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-sm">
               <Heart className="w-6 h-6 text-[#d85c5c]" />
             </div>
@@ -83,7 +83,7 @@ export default function Landing() {
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-6">
+        <div className="flex items-center justify-center gap-6 opacity-0-start animate-fade-in-up delay-500">
           <Link 
             to="/register" 
             className="bg-[#d85c5c] hover:bg-[#c44a4a] text-white px-8 py-3 rounded-full font-medium shadow-xl transition-transform hover:scale-105 flex items-center gap-2"

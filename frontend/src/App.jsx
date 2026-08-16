@@ -37,8 +37,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   return children;
 };
 
-// Placeholder dashboard
-const AdminDashboard = () => <div className="p-8"><h1 className="text-2xl font-bold">Admin Dashboard</h1><p>Welcome to the Filoxenia Management system.</p></div>;
+import Dashboard from './pages/admin/Dashboard'
 
 function AppRoutes() {
   return (
@@ -56,7 +55,7 @@ function AppRoutes() {
         </ProtectedRoute>
       }>
         <Route index element={<Navigate to="dashboard" replace />} />
-        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="dashboard" element={<Dashboard />} />
         <Route path="analytics" element={<AnalyticsDashboard />} />
         <Route path="campers" element={<Campers />} />
         <Route path="periods" element={<Periods />} />
