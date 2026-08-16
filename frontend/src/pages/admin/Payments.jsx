@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../lib/api';
-import { CreditCard, Plus, Euro, X, Loader2 } from 'lucide-react';
+import { CreditCard, Plus, Euro, X, Loader2, Download } from 'lucide-react';
 import toast from 'react-hot-toast';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 export default function Payments() {
   const [payments, setPayments] = useState([]);
@@ -35,6 +37,34 @@ export default function Payments() {
     } catch (err) {
       console.error('Failed to load registrations:', err);
     }
+  };
+
+  const generateReceipt = (payment) => {
+    const doc = new jsPDF();
+    
+    doc.setFontSize(20);
+    doc.text('Filoxenia Camp Receipt', 14, 22);
+    
+    const camperName = payment.registration?.camper 
+      ? `${payment.registration.camper.first_name} ${payment.registration.camper.last_name}` 
+      : 'Unknown Camper';
+      
+    const dateStr = payment.payment_date ? new Date(payment.payment_date).toLocaleDateString() : 'N/A';
+    
+    doc.autoTable({
+      startY: 30,
+      head: [['Field', 'Details']],
+      body: [
+        ['Payment ID', payment.id?.toString()],
+        ['Camper', camperName],
+        ['Amount', `€${Number(payment.amount).toFixed(2)}`],
+        ['Date', dateStr],
+        ['Method', payment.method],
+        ['Note', payment.note || '-']
+      ],
+    });
+
+    doc.save(`receipt-${payment.id}.pdf`);
   };
 
   const handleCreateSubmit = async (e) => {
@@ -124,12 +154,13 @@ export default function Payments() {
               <th className="px-6 py-4">Method</th>
               <th className="px-6 py-4">Note</th>
               <th className="px-6 py-4">Recorded By</th>
+              <th className="px-6 py-4">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y">
             {loading ? (
               <tr>
-                <td colSpan="6" className="px-6 py-10 text-center text-muted-foreground">
+                <td colSpan="7" className="px-6 py-10 text-center text-muted-foreground">
                   <div className="flex justify-center items-center gap-2">
                     <Loader2 className="w-5 h-5 animate-spin" /> Loading payments...
                   </div>
@@ -137,7 +168,7 @@ export default function Payments() {
               </tr>
             ) : payments.length === 0 ? (
               <tr>
-                <td colSpan="6" className="px-6 py-10 text-center text-muted-foreground">No payments recorded.</td>
+                <td colSpan="7" className="px-6 py-10 text-center text-muted-foreground">No payments recorded.</td>
               </tr>
             ) : (
               payments.map((payment) => (
@@ -166,6 +197,15 @@ export default function Payments() {
                   </td>
                   <td className="px-6 py-4 text-muted-foreground">{payment.note || '-'}</td>
                   <td className="px-6 py-4 text-xs text-muted-foreground">{payment.recorder?.name || 'System'}</td>
+                  <td className="px-6 py-4">
+                    <button
+                      onClick={() => generateReceipt(payment)}
+                      className="p-2 text-primary hover:bg-primary/10 rounded-md transition flex items-center justify-center"
+                      title="Download Receipt"
+                    >
+                      <Download className="w-4 h-4" />
+                    </button>
+                  </td>
                 </tr>
               ))
             )}

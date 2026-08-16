@@ -23,6 +23,10 @@ import Incidents from './pages/admin/Incidents'
 import FireProtection from './pages/admin/FireProtection'
 import Manual from './pages/admin/Manual'
 
+import CalendarView from './pages/admin/CalendarView'
+import CabinAssignment from './pages/admin/CabinAssignment'
+import MedicalDashboard from './pages/admin/MedicalDashboard'
+
 // Simple protected route wrapper
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, loading } = useAuth();
@@ -72,6 +76,11 @@ function AppRoutes() {
         <Route path="fire-protection" element={<FireProtection />} />
         <Route path="pricing" element={<Pricing />} />
         <Route path="manual" element={<Manual />} />
+
+        {/* Feature Expansions */}
+        <Route path="calendar" element={<CalendarView />} />
+        <Route path="assignment" element={<CabinAssignment />} />
+        <Route path="medical-dash" element={<MedicalDashboard />} />
       </Route>
       
       {/* Protected Parent Routes */}

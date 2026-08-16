@@ -13,7 +13,9 @@ export default function AdminLayout() {
 
   const navItems = [
     { name: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
-    { name: 'Analytics', path: '/admin/analytics', icon: LayoutDashboard },
+    { name: 'Calendar View', path: '/admin/calendar', icon: Calendar },
+    { name: 'Cabin Assignments', path: '/admin/assignment', icon: Users },
+    { name: 'Medical Staff Dash', path: '/admin/medical-dash', icon: Stethoscope },
     { name: 'Campers', path: '/admin/campers', icon: Users },
     { name: 'Periods', path: '/admin/periods', icon: Calendar },
     { name: 'Registrations', path: '/admin/registrations', icon: ClipboardList },

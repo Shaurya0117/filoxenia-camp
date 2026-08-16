@@ -4,6 +4,8 @@ import api from '../../lib/api';
 import toast from 'react-hot-toast';
 import { User, Calendar, ClipboardList, Stethoscope, LogOut, Tent, Plus, X, Menu, Loader2 } from 'lucide-react';
 
+import NotificationsTicker from '../../components/NotificationsTicker';
+
 export default function ParentPortal() {
   const { user, logout } = useAuth();
   const [children, setChildren] = useState([]);
@@ -106,11 +108,13 @@ export default function ParentPortal() {
         </div>
       </header>
 
-      <main className="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-12 flex flex-col lg:flex-row gap-16">
+      <main className="relative z-10 max-w-7xl mx-auto px-6 pt-10 pb-12">
+        <NotificationsTicker />
         
-        {/* Left Side: Hero Text */}
-        <div className="lg:w-1/2 mt-10 opacity-0-start animate-fade-in-up delay-100">
-          <h1 className="text-5xl md:text-7xl font-black uppercase tracking-widest text-white mb-6" style={{ textShadow: '2px 4px 10px rgba(0,0,0,0.5)' }}>
+        <div className="flex flex-col lg:flex-row gap-16">
+          {/* Left Side: Hero Text */}
+          <div className="lg:w-1/2 mt-10 opacity-0-start animate-fade-in-up delay-100">
+            <h1 className="text-5xl md:text-7xl font-black uppercase tracking-widest text-white mb-6" style={{ textShadow: '2px 4px 10px rgba(0,0,0,0.5)' }}>
             TIME TO <br/> CAMP
           </h1>
           <p className="text-blue-100 text-lg md:text-xl mb-10 max-w-md font-medium leading-relaxed italic" style={{ textShadow: '1px 2px 5px rgba(0,0,0,0.5)' }}>

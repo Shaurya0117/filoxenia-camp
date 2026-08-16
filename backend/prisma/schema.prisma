@@ -184,9 +184,11 @@ model CheckinLog {
 model Notification {
   id        Int      @id @default(autoincrement())
   camper_id Int?
+  title     String?
+  message   String?
   type      String?
   sent_at   DateTime @default(now())
-  channel   String?  @default("email")
+  channel   String?  @default("dashboard")
 
   camper    Camper?  @relation(fields: [camper_id], references: [id])
 
