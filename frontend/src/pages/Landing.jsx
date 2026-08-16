@@ -4,20 +4,17 @@ import { Compass, Book, Heart } from 'lucide-react';
 
 export default function Landing() {
   return (
-    <div className="min-h-screen relative overflow-hidden font-sans text-[#2c3e38]">
-      {/* Background Video */}
-      <video 
-        autoPlay 
-        loop 
-        muted 
-        playsInline 
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none fixed z-0"
-      >
-        <source src="/landing-bg.mp4" type="video/mp4" />
-      </video>
-
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#e8f1ec]/80 via-transparent to-[#8faca0]/30 pointer-events-none fixed z-0"></div>
+    <div 
+      className="min-h-screen relative overflow-hidden font-sans text-[#2c3e38]"
+      style={{
+        backgroundImage: "url('/landing-bg.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-[#e8f1ec]/80 via-transparent to-[#8faca0]/30 pointer-events-none fixed"></div>
       
       {/* Navigation */}
       <nav className="relative z-10 max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
