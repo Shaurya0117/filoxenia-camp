@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Compass, Book, Heart } from 'lucide-react';
+import { Waves, Mountain, Sunrise } from 'lucide-react';
 
 export default function Landing() {
   return (
@@ -23,7 +23,7 @@ export default function Landing() {
         </div>
         
         <div className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide text-[#1a2e26]">
-          <a href="#features" className="hover:text-[#d85c5c] transition-colors">Features</a>
+          <a href="#features" className="hover:text-[#d85c5c] transition-colors">Location</a>
           <a href="#about" className="hover:text-[#d85c5c] transition-colors">About</a>
           <a href="#contact" className="hover:text-[#d85c5c] transition-colors">Contact</a>
         </div>
@@ -43,42 +43,42 @@ export default function Landing() {
       <main className="relative z-10 max-w-4xl mx-auto px-6 pt-20 pb-32 text-center">
         
         <h1 className="font-serif text-5xl md:text-6xl font-bold leading-tight text-[#1a2e26] mb-6 drop-shadow-md opacity-0-start animate-fade-in-up delay-100">
-          Where Adventure Meets<br/>Safety & Creativity.
+          Where the Mountain<br/>Meets the Aegean Sea.
         </h1>
         
         <p className="text-lg md:text-xl text-[#2c3e38] max-w-2xl mx-auto mb-16 leading-relaxed font-serif italic font-medium drop-shadow-sm opacity-0-start animate-fade-in-up delay-200">
-          In the rush of modern life, imagine a camp that feels like a deep breath — gentle, grounding, and secure. A place where children reconnect with nature and themselves.
+          Nestled at the foot of a majestic mountain looming over our Greek village, Filoxenia rests on a beautiful, quiet gulf. Look across the crystal-clear water, and you'll see charming villages gazing right back at you.
         </p>
 
         {/* 3 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16 px-4">
           <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl opacity-0-start animate-fade-in-up delay-300">
             <div className="w-12 h-12 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-sm">
-              <Compass className="w-6 h-6 text-[#d85c5c]" />
+              <Waves className="w-6 h-6 text-[#d85c5c]" />
             </div>
-            <h3 className="font-bold text-[#1a2e26] mb-2 font-serif text-lg">Mindful Tools</h3>
+            <h3 className="font-bold text-[#1a2e26] mb-2 font-serif text-lg">Seaside Gulf</h3>
             <p className="text-sm text-[#2c3e38] font-medium leading-relaxed">
-              State-of-the-art HACCP food management and strict safety protocols ensure total well-being.
+              Step right off the camp and into the sheltered, azure waters of our private and beautiful gulf.
             </p>
           </div>
           
           <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl opacity-0-start animate-fade-in-up delay-400">
             <div className="w-12 h-12 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-sm">
-              <Book className="w-6 h-6 text-[#d85c5c]" />
+              <Mountain className="w-6 h-6 text-[#d85c5c]" />
             </div>
-            <h3 className="font-bold text-[#1a2e26] mb-2 font-serif text-lg">Creative Space</h3>
+            <h3 className="font-bold text-[#1a2e26] mb-2 font-serif text-lg">Towering Peaks</h3>
             <p className="text-sm text-[#2c3e38] font-medium leading-relaxed">
-              Parents can monitor periods, check-ins, and medical records from their own digital sanctuary.
+              Explore the grand mountainfoot that naturally protects our village, offering breathtaking hiking trails.
             </p>
           </div>
 
           <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl opacity-0-start animate-fade-in-up delay-500">
             <div className="w-12 h-12 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-sm">
-              <Heart className="w-6 h-6 text-[#d85c5c]" />
+              <Sunrise className="w-6 h-6 text-[#d85c5c]" />
             </div>
-            <h3 className="font-bold text-[#1a2e26] mb-2 font-serif text-lg">Gentle Reminders</h3>
+            <h3 className="font-bold text-[#1a2e26] mb-2 font-serif text-lg">Village Panoramas</h3>
             <p className="text-sm text-[#2c3e38] font-medium leading-relaxed">
-              Automated notifications, billing (APY), and group management to bring clarity to every day.
+              Experience spectacular, sun-drenched views of the picturesque villages resting on the opposite shoreline.
             </p>
           </div>
         </div>
