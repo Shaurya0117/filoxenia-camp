@@ -14,6 +14,7 @@ export default function ParentPortal() {
   const [periods, setPeriods] = useState([]);
   const [selectedMedicalCamper, setSelectedMedicalCamper] = useState(null);
   const [medicalSubmitting, setMedicalSubmitting] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const fetchChildren = async () => {
     try {
