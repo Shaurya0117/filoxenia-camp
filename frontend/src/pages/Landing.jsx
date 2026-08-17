@@ -52,8 +52,8 @@ export default function Landing() {
 
         {/* 3 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16 px-4">
-          <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl opacity-0-start animate-fade-in-up delay-300">
-            <div className="w-12 h-12 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-sm">
+          <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl opacity-0-start animate-fade-in-up delay-300 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:bg-white/50 group">
+            <div className="w-12 h-12 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300">
               <Waves className="w-6 h-6 text-[#d85c5c]" />
             </div>
             <h3 className="font-bold text-[#1a2e26] mb-2 font-serif text-lg">Seaside Gulf</h3>
@@ -62,8 +62,8 @@ export default function Landing() {
             </p>
           </div>
           
-          <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl opacity-0-start animate-fade-in-up delay-400">
-            <div className="w-12 h-12 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-sm">
+          <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl opacity-0-start animate-fade-in-up delay-400 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:bg-white/50 group">
+            <div className="w-12 h-12 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300">
               <Mountain className="w-6 h-6 text-[#d85c5c]" />
             </div>
             <h3 className="font-bold text-[#1a2e26] mb-2 font-serif text-lg">Towering Peaks</h3>
@@ -72,8 +72,8 @@ export default function Landing() {
             </p>
           </div>
 
-          <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl opacity-0-start animate-fade-in-up delay-500">
-            <div className="w-12 h-12 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-sm">
+          <div className="flex flex-col items-center bg-white/40 backdrop-blur-md p-6 rounded-3xl border border-white/50 shadow-xl opacity-0-start animate-fade-in-up delay-500 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:bg-white/50 group">
+            <div className="w-12 h-12 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300">
               <Sunrise className="w-6 h-6 text-[#d85c5c]" />
             </div>
             <h3 className="font-bold text-[#1a2e26] mb-2 font-serif text-lg">Village Panoramas</h3>
