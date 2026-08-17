@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
-import { Eye, EyeOff, Tent, Loader2, Twitter, Facebook, Mail } from 'lucide-react';
+import { Eye, EyeOff, Tent, Loader2 } from 'lucide-react';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -136,10 +136,10 @@ export default function Login() {
                 <span className="font-bold font-serif">G</span>
               </button>
               <button className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-blue-50 hover:text-blue-500 transition-colors shadow-sm">
-                <Twitter className="w-4 h-4 fill-current" />
+                <span className="font-bold font-serif">t</span>
               </button>
               <button className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-blue-50 hover:text-blue-700 transition-colors shadow-sm">
-                <Facebook className="w-4 h-4 fill-current" />
+                <span className="font-bold font-serif">f</span>
               </button>
             </div>
           </div>
