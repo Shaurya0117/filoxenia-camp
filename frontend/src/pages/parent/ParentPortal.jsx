@@ -199,6 +199,7 @@ export default function ParentPortal() {
             </div>
           </div>
         </div>
+        </div>
       </main>
 
       {/* Easy Registration Modal */}
