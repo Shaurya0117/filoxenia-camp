@@ -33,7 +33,8 @@ export default function ParentPortal() {
   const fetchPeriods = async () => {
     try {
       const res = await api.get('/periods');
-      setPeriods(res.data.periods || []);
+      // The API returns the array directly, so res.data is the array of periods.
+      setPeriods(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error('Failed to fetch periods');
     }
