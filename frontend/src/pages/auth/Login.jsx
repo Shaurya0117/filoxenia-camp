@@ -35,7 +35,7 @@ export default function Login() {
   };
 
   return (
-    <div className="relative min-h-screen w-full flex items-center bg-[#4a6b55] overflow-hidden font-sans">
+    <div className="relative min-h-screen w-full flex items-center bg-[#1e293b] overflow-hidden font-sans">
       
       {/* Background illustration overlay (optional subtle pattern) */}
       <div 
@@ -73,7 +73,7 @@ export default function Login() {
           
           <div className="mb-12">
             <h1 className="text-3xl md:text-4xl text-gray-600 font-light mb-1">Hello there,</h1>
-            <h2 className="text-4xl md:text-5xl text-[#1a2e26] font-bold tracking-tight">welcome to Filoxenia</h2>
+            <h2 className="text-4xl md:text-5xl text-[#0f172a] font-bold tracking-tight">welcome to Filoxenia</h2>
           </div>
 
           {error && (
@@ -89,7 +89,7 @@ export default function Login() {
                 type="email" 
                 required
                 placeholder="Enter your email address"
-                className="w-full py-3 bg-transparent border-b-2 border-gray-200 focus:border-[#4a6b55] outline-none text-gray-700 placeholder:text-gray-300 transition-colors"
+                className="w-full py-3 bg-transparent border-b-2 border-gray-200 focus:border-[#1e293b] outline-none text-gray-700 placeholder:text-gray-300 transition-colors"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -102,14 +102,14 @@ export default function Login() {
                   type={showPassword ? "text" : "password"}
                   required
                   placeholder="Set a strong password"
-                  className="w-full py-3 bg-transparent border-b-2 border-gray-200 focus:border-[#4a6b55] outline-none text-gray-700 placeholder:text-gray-300 transition-colors pr-10"
+                  className="w-full py-3 bg-transparent border-b-2 border-gray-200 focus:border-[#1e293b] outline-none text-gray-700 placeholder:text-gray-300 transition-colors pr-10"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button 
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-300 hover:text-[#4a6b55] transition-colors"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-300 hover:text-[#1e293b] transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -123,7 +123,7 @@ export default function Login() {
               <button 
                 type="submit" 
                 disabled={loading}
-                className="bg-gradient-to-r from-orange-300 to-amber-500 hover:from-orange-400 hover:to-amber-600 text-white font-bold tracking-widest px-10 py-3 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all disabled:opacity-70 flex items-center justify-center min-w-[140px]"
+                className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-bold tracking-widest px-10 py-3 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all disabled:opacity-70 flex items-center justify-center min-w-[140px]"
               >
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'LOGIN'}
               </button>
