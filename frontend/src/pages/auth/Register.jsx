@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
+import registerBg from '../../assets/register-bg.jpg';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -24,10 +25,13 @@ export default function Register() {
   };
 
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-muted/40">
-      <div className="w-full max-w-md bg-card p-8 shadow-lg rounded-2xl border border-border">
+    <div 
+      className="flex h-screen w-full items-center justify-center bg-cover bg-center"
+      style={{ backgroundImage: `url(${registerBg})` }}
+    >
+      <div className="w-full max-w-md bg-white/90 backdrop-blur-md p-8 shadow-2xl rounded-3xl border border-white/20">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-foreground">Create Account</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Create Account</h1>
           <p className="text-muted-foreground mt-2">Sign up for Camp Management</p>
         </div>
         

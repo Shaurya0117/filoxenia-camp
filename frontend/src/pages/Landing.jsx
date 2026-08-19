@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Waves, Mountain, Sunrise } from 'lucide-react';
+import mainBg from '../assets/main-bg.jpg';
 
 export default function Landing() {
   return (
     <div 
       className="min-h-screen relative overflow-hidden font-sans text-[#2c3e38]"
       style={{
-        backgroundImage: "url('/landing-bg.png')",
+        backgroundImage: `url(${mainBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

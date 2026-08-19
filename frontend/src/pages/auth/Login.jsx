@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { Eye, EyeOff, Tent, Loader2 } from 'lucide-react';
+import mainBg from '../../assets/main-bg.jpg';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -40,7 +41,7 @@ export default function Login() {
       <div 
         className="absolute inset-0 opacity-40 pointer-events-none mix-blend-overlay"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&q=80&w=2000')",
+          backgroundImage: `url(${mainBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'right center'
         }}
