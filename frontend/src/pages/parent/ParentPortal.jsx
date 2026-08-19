@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
 import api from '../../lib/api';
 import toast from 'react-hot-toast';
 import { User, Calendar, ClipboardList, Stethoscope, LogOut, Tent, Plus, X, Menu, Loader2 } from 'lucide-react';
@@ -117,9 +118,9 @@ export default function ParentPortal() {
           </div>
           
           <div className="hidden md:flex items-center gap-8 text-sm font-medium tracking-widest uppercase">
-            <span className="hover:text-amber-400 cursor-pointer transition">Home</span>
-            <span className="hover:text-amber-400 cursor-pointer transition">Dashboard</span>
-            <span className="hover:text-amber-400 cursor-pointer transition">Contact Us</span>
+            <Link to="/" className="hover:text-amber-400 cursor-pointer transition">Home</Link>
+            <Link to="/parent/dashboard" className="hover:text-amber-400 cursor-pointer transition">Dashboard</Link>
+            <a href="mailto:contact@filoxenia.com" className="hover:text-amber-400 cursor-pointer transition">Contact Us</a>
           </div>
 
           <div className="flex items-center gap-4">
