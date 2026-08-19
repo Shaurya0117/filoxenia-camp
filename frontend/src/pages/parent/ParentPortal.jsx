@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import api from '../../lib/api';
 import toast from 'react-hot-toast';
 import { User, Calendar, ClipboardList, Stethoscope, LogOut, Tent, Plus, X, Menu, Loader2 } from 'lucide-react';
+import mainBg from '../../assets/main-bg.jpg';
 
 import NotificationsTicker from '../../components/NotificationsTicker';
 
@@ -99,9 +100,9 @@ export default function ParentPortal() {
 
   return (
     <div 
-      className="min-h-screen bg-[#1a2b4c] text-white relative font-sans"
+      className="min-h-screen bg-[#1e293b] text-white relative font-sans"
       style={{
-        backgroundImage: "url('/parent-bg.png')",
+        backgroundImage: `url(${mainBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center bottom',
         backgroundRepeat: 'no-repeat',
@@ -199,6 +200,35 @@ export default function ParentPortal() {
                   </div>
                 ))
               )}
+            </div>
+          </div>
+
+          {/* New Upcoming Events Widget */}
+          <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-3xl shadow-2xl mt-8">
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+              <Calendar className="w-6 h-6 text-amber-400" /> Upcoming Events
+            </h2>
+            <div className="space-y-4">
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center gap-4 hover:bg-white/10 transition">
+                <div className="bg-amber-400/20 text-amber-300 font-bold p-3 rounded-xl text-center min-w-[70px]">
+                  <div className="text-xs uppercase tracking-widest">Aug</div>
+                  <div className="text-2xl">15</div>
+                </div>
+                <div>
+                  <h3 className="font-bold text-white text-lg">Opening Ceremony</h3>
+                  <p className="text-sm text-white/70">Main Campfire Ring • 7:00 PM</p>
+                </div>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center gap-4 hover:bg-white/10 transition">
+                <div className="bg-amber-400/20 text-amber-300 font-bold p-3 rounded-xl text-center min-w-[70px]">
+                  <div className="text-xs uppercase tracking-widest">Aug</div>
+                  <div className="text-2xl">22</div>
+                </div>
+                <div>
+                  <h3 className="font-bold text-white text-lg">Parent Visiting Day</h3>
+                  <p className="text-sm text-white/70">Lakefront & Cabins • 10:00 AM</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
