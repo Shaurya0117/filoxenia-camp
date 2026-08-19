@@ -35,11 +35,11 @@ export default function Login() {
   };
 
   return (
-    <div className="relative min-h-screen w-full flex items-center bg-[#1e293b] overflow-hidden font-sans">
+    <div className="relative min-h-screen w-full flex items-center overflow-hidden font-sans bg-[#e5dbe4]">
       
-      {/* Background illustration overlay (optional subtle pattern) */}
+      {/* Background illustration */}
       <div 
-        className="absolute inset-0 opacity-40 pointer-events-none mix-blend-overlay"
+        className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: `url(${mainBg})`,
           backgroundSize: 'cover',
@@ -54,7 +54,7 @@ export default function Login() {
       />
 
       {/* Top Right Navigation */}
-      <div className="absolute top-8 right-12 z-20 flex items-center gap-2 text-white font-medium text-lg tracking-wide drop-shadow-md">
+      <div className="absolute top-8 right-12 z-20 flex items-center gap-2 text-gray-800 font-medium text-lg tracking-wide drop-shadow-md">
         <span className="font-bold cursor-pointer">Sign In</span>
         <span className="opacity-50 mx-2">|</span>
         <Link to="/register" className="opacity-70 hover:opacity-100 transition-opacity">Sign Up</Link>
